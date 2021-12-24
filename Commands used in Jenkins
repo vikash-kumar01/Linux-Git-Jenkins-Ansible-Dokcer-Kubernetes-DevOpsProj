@@ -1,0 +1,17 @@
+#copy git's Dockerfile to Ansible server /opt
+> rsync -avh /var/lib/jenkins/workspace/kubernetesproject/* root@172.31.44.210:/opt
+
+#Building image using Docekerfile on ANSIBLE SERVER and pushing it to DockerHUb so Must login docker on ANSIBLE SERVER 
+
+cd /opt
+docker image build -t $JOB_NAME:v1.$BUILD_ID .
+docker image tag $JOB_NAME:v1.$BUILD_ID vikashashoke/$JOB_NAME:v1.$BUILD_ID
+docker image tag $JOB_NAME:v1.$BUILD_ID vikashashoke/$JOB_NAME:latest
+docker image push vikashashoke/$JOB_NAME:v1.$BUILD_ID
+docker image push vikashashoke/$JOB_NAME:latest  
+docker image rm $JOB_NAME:v1.$BUILD_ID vikashashoke/$JOB_NAME:v1.$BUILD_ID vikashashoke/$JOB_NAME:latest   
+
+#postJOb 
+#Execute Ansible playbook which will go to KUbernetes server to Apply the service and deployments.yml which will pull the latest images from DockerHub which we pushed 
+
+> ansible-playbook /opt/ansible.yml 
