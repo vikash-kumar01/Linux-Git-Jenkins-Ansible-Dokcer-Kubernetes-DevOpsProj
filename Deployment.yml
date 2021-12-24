@@ -7,11 +7,6 @@ spec:
    selector:      # tells the controller which pods to watch/belong to
     matchLabels:
      app: cloudknowledges
-   strategy:
-     type: RollingUpdate
-     rollingupdate:
-       maxSurge: 1
-       maxUnavailable: 1
    template:
       metadata:
         labels:
