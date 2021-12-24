@@ -4,7 +4,27 @@
 
 
 
-####################################################Setup of Kubernetes on AWS Itself Using KOPS####################################################
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Setup of Kubernetes on AWS Itself Using KOPS
 Requirements to Install:
 a)One Vm --> Configure aws CLI
 b) ROle-->(ec2,s3,route53,iam  premissions enable and attache to VM)
