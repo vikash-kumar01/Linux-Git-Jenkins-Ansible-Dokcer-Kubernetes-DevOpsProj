@@ -1,0 +1,25 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+   name: cloudknowledges
+spec:
+   replicas: 2
+   selector:      # tells the controller which pods to watch/belong to
+    matchLabels:
+     app: cloudknowledges
+   strategy:
+     type: RollingUpdate
+     rollingupdate:
+       maxSurge: 1
+       maxUnavailable: 1
+   template:
+      metadata:
+        labels:
+          app: cloudknowledges
+      spec:
+       containers:
+        - name: cloudknowledges
+          image: vikashashoke/kubernetes-image
+          imagePullPolicy: Always
+          ports:
+          - containerPort: 80
