@@ -1,0 +1,9 @@
+cd /opt
+
+docker image build -t $JOB_NAME:v1.$BUILD_ID .
+docker image tag $JOB_NAME:v1.$BUILD_ID vikashashoke/$JOB_NAME:v1.$BUILD_ID
+docker image tag $JOB_NAME:v1.$BUILD_ID vikashashoke/$JOB_NAME:latest
+docker image push vikashashoke/$JOB_NAME:v1.$BUILD_ID
+docker image push vikashashoke/$JOB_NAME:latest  
+
+docker image rm $JOB_NAME:v1.$BUILD_ID vikashashoke/$JOB_NAME:v1.$BUILD_ID vikashashoke/$JOB_NAME:latest   
